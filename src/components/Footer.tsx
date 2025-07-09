@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-secondary py-12 px-4">
+    <footer className="bg-secondary px-4 pb-0 mb-0 border-none" style={{marginBottom: 0, paddingBottom: 0, border: 'none'}}>
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center">
           {/* Logo and Company */}
@@ -43,8 +43,8 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 pt-8 border-t border-border text-center">
-          <p className="text-muted-foreground">
+        <div className="mt-2 pt-2 border-t border-border text-center" style={{marginBottom: 0, paddingBottom: 0}}>
+          <p className="text-muted-foreground" style={{marginBottom: 0, paddingBottom: 0}}>
             © 2024 Albatross Interactive. All rights reserved. United State is a trademark of Albatross Interactive.
           </p>
         </div>
