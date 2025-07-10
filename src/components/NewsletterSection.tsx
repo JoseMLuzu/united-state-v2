@@ -25,10 +25,8 @@ const NewsletterSection = () => {
   return (
     <section className="py-20 px-4 bg-secondary/30">
       <div className="container mx-auto max-w-4xl text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary">Stay Updated</h2>
-        <p className="text-xl text-muted-foreground mb-8">
-          Get exclusive updates, beta access, and behind-the-scenes content
-        </p>
+        <h2 className="text-3xl md:text-4xl font-bold mb-10 text-primary">Stay Updated</h2>
+        
 
         <Card className="max-w-md mx-auto bg-card/50 backdrop-blur-sm">
           <CardContent className="p-6">
