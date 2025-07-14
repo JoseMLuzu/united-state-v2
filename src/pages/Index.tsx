@@ -5,7 +5,6 @@ import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import GameplaySection from '@/components/GameplaySection';
 import NewsletterSection from '@/components/NewsletterSection';
-import Footer from '@/components/Footer';
 
 const Index = () => {
   useEffect(() => {
@@ -18,7 +17,7 @@ const Index = () => {
         autoScrolling: true,
         scrollHorizontally: false,
         navigation: false,
-        anchors: ['hero', 'gameplay', 'newsletter', 'footer'],
+        anchors: ['hero', 'gameplay', 'newsletter'],
         sectionSelector: '.section',
         fitToSection: true,
         scrollingSpeed: 700,
@@ -40,7 +39,6 @@ const Index = () => {
         <div className="section"><GameplaySection /></div>
         <div className="section"><NewsletterSection /></div>
       </div>
-      {/* <Footer /> */}
       <style>{`
         .fp-watermark { display: none !important; }
         html, body, #root, #fullpage {
@@ -49,6 +47,7 @@ const Index = () => {
           margin: 0;
           padding: 0;
           box-sizing: border-box;
+          background: #000 !important;
         }
         body {
           overflow-x: hidden;

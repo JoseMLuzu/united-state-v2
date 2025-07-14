@@ -17,8 +17,8 @@ const GameplaySection = () => {
       <img
         src={map}
         alt="Game Map"
-        className="w-full h-full object-cover max-w-none max-h-none rounded-lg shadow-lg"
-        style={{ minHeight: '80vh', minWidth: '80vw' }}
+        className="object-cover rounded-lg shadow-lg"
+        style={{ minHeight: '65vh', minWidth: '65vw', maxWidth: '90vw', maxHeight: '90vh' }}
       />
     </section>
   );

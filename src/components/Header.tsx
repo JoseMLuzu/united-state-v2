@@ -52,20 +52,7 @@ const Header = () => {
               </a>
             </div>
 
-            <div className="flex flex-col space-y-2 mt-0 buttonsSection">
-              <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/10 rounded-none px-8 py-3 transition-colors duration-200 flex items-center justify-between">
-                <span className="flex-1 text-left">JOIN OUR DISCORD</span>
-                <img src={discordIcon} alt="Discord" className="w-6 h-6 ml-4" />
-              </Button>
-              <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/10 rounded-none px-8 py-3 transition-colors duration-200 flex items-center justify-between">
-                <span className="flex-1 text-left">WISHLIST NOW</span>
-                <img src={steamIcon} alt="Steam" className="w-6 h-6 ml-4" />
-              </Button>
-              <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/10 rounded-none px-8 py-3 transition-colors duration-200 flex items-center justify-between">
-                <span className="flex-1 text-left">CONTACT US</span>
-                <img src={emailIcon} alt="Email" className="w-6 h-6 ml-4" />
-              </Button>
-            </div>
+            
           
           </div>
 

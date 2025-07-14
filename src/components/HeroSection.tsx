@@ -2,10 +2,8 @@ import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
 import heroBg from '@/assets/Faded_Image.jpg';
 import principalIcon from '@/assets/main-title-transparent-V3-no-gradient-for-dark-background2-e1742786470534.png';
-import psIcon from '@/assets/play-station.png';
-import xboxIcon from '@/assets/xbox-1.png';
-import steamIcon from '@/assets/steam1.png';
-import epicIcon from '@/assets/epic-1.png';
+import discordIcon from '@/assets/discord.png'; //
+import steamIcon from '@/assets/steam1.png'; // Assuming you have a Steam icon
 
 // Ajusta la altura de la navbar aquí si cambia en el futuro
 const NAVBAR_HEIGHT = 72; // px, ajusta si tu navbar es más alta o baja
@@ -38,28 +36,23 @@ const HeroSection = () => {
         <img src={principalIcon} alt="Main Title" className="mx-auto max-w-full h-auto mb-0 mt-0 animate-fade-in" />
 
         {/* Subtitle */}
+        <blockquote className="italic text-xl md:text-2xl text-white mt-0 mb-2 animate-fade-in">
+          “one country, three flags”
+        </blockquote>
         <p className="text-xl md:text-2xl text-white mt-0 mb-0 animate-fade-in">
           4v4 Competitive 3rd-Person Shooter
         </p>
 
-        {/* Platform Icons */}
-        <div className="flex justify-center items-center space-x-8 opacity-80 mt-10 mb-0">
-          {/* PlayStation */}
-          <div className="platform-icon">
-            <img src={psIcon} alt="PlayStation" className="object-contain" style={{ maxWidth: '50px', maxHeight: '50px', width: '100%', height: '100%' }} />
-          </div>
-          {/* Xbox */}
-          <div className="platform-icon">
-            <img src={xboxIcon} alt="Xbox" className="object-contain" style={{ maxWidth: '50px', maxHeight: '50px', width: '100%', height: '100%' }} />
-          </div>
-          {/* Steam */}
-          <div className="platform-icon">
-            <img src={steamIcon} alt="Steam" className="object-contain" style={{ maxWidth: '50px', maxHeight: '50px', width: '100%', height: '100%' }} />
-          </div>
-          {/* Epic Games */}
-          <div className="platform-icon">
-            <img src={epicIcon} alt="Epic Games" className="object-contain" style={{ maxWidth: '50px', maxHeight: '50px', width: '100%', height: '100%' }} />
-          </div>
+        {/* Action Buttons */}
+        <div className="flex flex-col space-y-2 mt-0 buttonsSection">
+          <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/10 rounded-none px-4 py-3 transition-colors duration-200 flex items-center justify-between w-56 mx-auto">
+            <span className="flex-1 text-left">JOIN OUR DISCORD</span>
+            <img src={discordIcon} alt="Discord" className="w-6 h-6 ml-4" />
+          </Button>
+          <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/10 rounded-none px-4 py-3 transition-colors duration-200 flex items-center justify-between w-56 mx-auto">
+            <span className="flex-1 text-left">WISHLIST NOW</span>
+            <img src={steamIcon} alt="Steam" className="w-6 h-6 ml-4" />
+          </Button>
         </div>
       </div>
 
