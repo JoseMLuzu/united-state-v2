@@ -31,41 +31,46 @@ const NewsletterSection = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-black">
-        <div className="container mx-auto max-w-2xl flex flex-col items-center text-center">
-        {/* Logo grande */}
-        <img src={albatrossLogo} alt="Albatross Interactive" className="w-80 mb-40" />
+    <section className="py-10 px-2 sm:py-16 sm:px-4 bg-black">
+      <div className="container mx-auto max-w-full sm:max-w-2xl flex flex-col items-center text-center">
+        {/* Logo de Albatross Interactive oculto por solicitud */}
+        {false && (
+          <img src={albatrossLogo} alt="Albatross Interactive" className="w-40 sm:w-80 mb-10 sm:mb-40" />
+        )}
         {/* Contact */}
-        <div className="mb-10">
-          <h3 className="text-2xl font-bold mb-2">CONTACT US</h3>
-          <div className="text-lg">contact@unitedstategame.com</div>
+        <div className="mb-6 sm:mb-10">
+          <h3 className="text-lg sm:text-2xl font-bold mb-2">CONTACT US</h3>
+          <div className="text-base sm:text-lg break-all">contact@unitedstategame.com</div>
         </div>
         {/* Newsletter */}
-        <div className="mb-8 w-full max-w-md">
-          <h3 className="text-xl font-bold mb-4">SIGN UP FOR EXCLUSIVE UPDATES</h3>
-          <form className="flex flex-row items-center justify-center gap-0 w-full">
-            <input type="email" placeholder="Enter your email address" className="px-4 py-2 rounded-l bg-black/40 text-white border border-white/20 w-full min-w-[300px]" />
-            <button type="submit" className="h-12 bg-gray-300 text-black rounded-r font-bold text-lg border border-white/20 w-24 -ml-1">SIGN UP</button>
+        <div className="mb-6 sm:mb-8 w-full max-w-xs sm:max-w-md">
+          <h3 className="text-base sm:text-xl font-bold mb-4">SIGN UP FOR EXCLUSIVE UPDATES</h3>
+          <form className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-0 w-full">
+            <input type="email" placeholder="Enter your email address" className="px-3 py-2 rounded-l bg-black/40 text-white border border-white/20 w-full min-w-[180px] sm:min-w-[300px]" />
+            <button type="submit" className="h-10 sm:h-12 bg-gray-300 text-black rounded-r font-bold text-base sm:text-lg border border-white/20 w-full sm:w-24 sm:-ml-1 mt-2 sm:mt-0">SIGN UP</button>
           </form>
         </div>
-        {/* Social Icons */}
-        <div className="mb-8">
-          <div className="mb-4 font-semibold">FOLLOW US</div>
-          <div className="flex justify-center items-center gap-6">
-            <img src={tiktokIcon} alt="TikTok" className="w-12 h-12" />
-            <img src={instagramIcon} alt="Instagram" className="w-12 h-12" />
-            <img src={discordIcon} alt="Discord" className="w-12 h-12" />
-            <img src={xIcon} alt="X" className="w-12 h-12" />
-            <img src={youtubeIcon} alt="YouTube" className="w-12 h-12" />
-            <img src={steamIcon} alt="Steam" className="w-12 h-12" />
+        {/* Social Icons ocultos por solicitud */}
+        {false && (
+          <div className="mb-6 sm:mb-8">
+            <div className="mb-4 font-semibold">FOLLOW US</div>
+            <div className="flex justify-center items-center gap-4 sm:gap-6 flex-wrap">
+              <img src={tiktokIcon} alt="TikTok" className="w-8 h-8 sm:w-12 sm:h-12" />
+              <img src={instagramIcon} alt="Instagram" className="w-8 h-8 sm:w-12 sm:h-12" />
+              <img src={discordIcon} alt="Discord" className="w-8 h-8 sm:w-12 sm:h-12" />
+              <img src={xIcon} alt="X" className="w-8 h-8 sm:w-12 sm:h-12" />
+              <img src={youtubeIcon} alt="YouTube" className="w-8 h-8 sm:w-12 sm:h-12" />
+              <img src={steamIcon} alt="Steam" className="w-8 h-8 sm:w-12 sm:h-12" />
+            </div>
           </div>
-        </div>
-        {/* Copyright */}
-        <div className="text-lg mb-4 mt-8">
-          © 2025 ALBATROSS INTERACTIVE LLC, All rights reserved.
-        </div>
-        {/* United State Logo */}
-        <img src={unitedStateLogo} alt="United State" className="w-96 mt-2 mb-2" />
+        )}
+        {/* United State Logo oculto por solicitud */}
+        {false && (
+          <img src={unitedStateLogo} alt="United State" className="w-48 sm:w-96 mt-2 mb-2" />
+        )}
+      </div>
+      <div className="text-base sm:text-lg mb-2 sm:mb-4 text-center px-2" style={{ position: 'absolute', bottom: 32, left: 0, width: '100%' }}>
+        © 2025 ALBATROSS INTERACTIVE LLC, All rights reserved.
       </div>
     </section>
   );

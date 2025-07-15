@@ -56,33 +56,34 @@ const Header = () => {
           
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button oculto por solicitud */}
+          {/*
           <button
             className="md:hidden text-primary ml-8"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
+          */}
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu oculto por solicitud */}
+        {/*
         {isMenuOpen && (
           <div className="md:hidden border-t border-border bg-card/95 backdrop-blur-md">
             <div className="px-4 py-6 space-y-4">
-              <Button className="w-full btn-gaming">
-                <ExternalLink className="w-4 h-4 mr-2" />
-                JOIN OUR DISCORD
+              <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/10 rounded-none px-4 py-3 transition-colors duration-200 flex items-center justify-between w-full">
+                <span className="flex-1 text-left">JOIN OUR DISCORD</span>
+                <img src={discordIcon} alt="Discord" className="w-6 h-6 ml-4" />
               </Button>
-              <Button variant="outline" className="w-full btn-outline-gaming">
-                WISHLIST NOW
-              </Button>
-              <Button variant="ghost" className="w-full justify-start">
-                <Mail className="w-4 h-4 mr-2" />
-                CONTACT US
+              <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/10 rounded-none px-4 py-3 transition-colors duration-200 flex items-center justify-between w-full">
+                <span className="flex-1 text-left">WISHLIST NOW</span>
+                <img src={steamIcon} alt="Steam" className="w-6 h-6 ml-4" />
               </Button>
             </div>
           </div>
         )}
+        */}
       </div>
     </header>
   );
