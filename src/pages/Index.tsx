@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import GameplaySection from '@/components/GameplaySection';
 import NewsletterSection from '@/components/NewsletterSection';
+import Magnifier from '@/components/Magnifer';
 
 const Index = () => {
   useEffect(() => {
@@ -36,7 +37,10 @@ const Index = () => {
       <Header />
       <div id="fullpage">
         <div className="section"><HeroSection /></div>
-        <div className="section"><GameplaySection /></div>
+        <div className="section" id="gameplay-section">
+          <GameplaySection />
+          
+        </div>
         <div className="section"><NewsletterSection /></div>
       </div>
       <style>{`
