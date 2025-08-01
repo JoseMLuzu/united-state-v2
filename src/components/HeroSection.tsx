@@ -45,10 +45,12 @@ const HeroSection = () => {
 
         {/* Action Buttons */}
         <div className="flex flex-col space-y-2 mt-0 buttonsSection">
-          <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/10 rounded-none px-4 py-3 transition-colors duration-200 flex items-center justify-between w-56 mx-auto btn-animate-scale">
-            <span className="flex-1 text-left">JOIN OUR DISCORD</span>
-            <img src={discordIcon} alt="Discord" className="w-6 h-6 ml-4" />
-          </Button>
+          <a href="https://discord.com/invite/k3KyYGtvD8" target="_blank" rel="noopener noreferrer">
+            <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/10 rounded-none px-4 py-3 transition-colors duration-200 flex items-center justify-between w-56 mx-auto btn-animate-scale" >
+              <span className="flex-1 text-left">JOIN OUR DISCORD</span>
+              <img src={discordIcon} alt="Discord" className="w-6 h-6 ml-4" />
+            </Button>
+          </a>
           {/*
           <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/10 rounded-none px-4 py-3 transition-colors duration-200 flex items-center justify-between w-56 mx-auto btn-animate-scale">
             <span className="flex-1 text-left">WISHLIST NOW</span>
