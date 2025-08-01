@@ -18,15 +18,39 @@ const NewsletterSection = () => {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      setIsSubscribed(true);
-      setEmail('');
-      toast({
-        title: "Successfully subscribed!",
-        description: "You'll receive exclusive updates about United State.",
-      });
+      try {
+        const response = await fetch('https://formspree.io/f/mjkoevrb', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
+        });
+        if (response.ok) {
+          setIsSubscribed(true);
+          setEmail('');
+          toast({
+            title: "Successfully subscribed!",
+            description: "You'll receive exclusive updates about United State.",
+          });
+        } else {
+          toast({
+            title: "Error subscribing",
+            description: "Please try again later.",
+            variant: "destructive",
+          });
+        }
+      } catch {
+        toast({
+          title: "Network error",
+          description: "Please check your connection and try again.",
+          variant: "destructive",
+        });
+      }
     }
   };
 
@@ -45,9 +69,22 @@ const NewsletterSection = () => {
         {/* Newsletter */}
         <div className="mb-6 sm:mb-8 w-full max-w-xs sm:max-w-md">
           <h3 className="text-base sm:text-xl font-bold mb-4">SIGN UP FOR EXCLUSIVE UPDATES</h3>
-          <form className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-0 w-full">
-            <input type="email" placeholder="Enter your email address" className="px-3 py-2 rounded-l bg-black/40 text-white border border-white/20 w-full min-w-[180px] sm:min-w-[300px]" />
-            <button type="submit" className="h-10 sm:h-12 bg-gray-300 text-black rounded-r font-bold text-base sm:text-lg border border-white/20 w-full sm:w-24 sm:-ml-1 mt-2 sm:mt-0">SIGN UP</button>
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-0 w-full">
+            <input
+              type="email"
+              placeholder="Enter your email address"
+              className="px-3 py-2 rounded-l bg-black/40 text-white border border-white/20 w-full min-w-[180px] sm:min-w-[300px]"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+            />
+            <button
+              type="submit"
+              className="h-10 sm:h-12 bg-gray-300 text-black rounded-r font-bold text-base sm:text-lg border border-white/20 w-full sm:w-32 sm:-ml-1 mt-2 sm:mt-0"
+              disabled={isSubscribed}
+            >
+              {isSubscribed ? 'SUBSCRIBED' : 'SIGN UP'}
+            </button>
           </form>
         </div>
         {/* Social Icons ocultos por solicitud */}
