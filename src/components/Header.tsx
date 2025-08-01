@@ -35,19 +35,19 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-6">
             <div className="flex items-center space-x-4">
               {/* Social Icons */}
-              <a href="#" className="flex items-center space-x-1 social-icon">
+              <a href="https://www.tiktok.com/@unitedstate_game" className="flex items-center space-x-1 social-icon" target="_blank" rel="noopener noreferrer">
                 <img src={tiktokIcon} alt="TikTok" className="w-8 h-8 object-contain" />
               </a>
-              <a href="#" className="flex items-center space-x-1 social-icon">
+              <a href="https://www.instagram.com/unitedstategame/" className="flex items-center space-x-1 social-icon" target="_blank" rel="noopener noreferrer">
                 <img src={instagramIcon} alt="Instagram" className="w-8 h-8 object-contain" />
               </a>
-              <a href="#" className="flex items-center space-x-1 social-icon">
+              <a href="https://x.com/UnitedStateGame" className="flex items-center space-x-1 social-icon" target="_blank" rel="noopener noreferrer">
                 <img src={xIcon} alt="X" className="w-8 h-8 object-contain" />
               </a>
-              <a href="#" className="flex items-center space-x-1 social-icon">
+              <a href="https://www.youtube.com/@UnitedStateGame" className="flex items-center space-x-1 social-icon" target="_blank" rel="noopener noreferrer">
                 <img src={youtubeIcon} alt="YouTube" className="w-8 h-8 object-contain" />
               </a>
-              <a href="#" className="flex items-center space-x-1 social-icon">
+              <a href="https://discord.com/invite/k3KyYGtvD8" className="flex items-center space-x-1 social-icon" target="_blank" rel="noopener noreferrer">
                 <img src={discordIcon} alt="Discord" className="w-8 h-8 object-contain" />
               </a>
             </div>
@@ -56,19 +56,16 @@ const Header = () => {
           
           </div>
 
-          {/* Mobile Menu Button oculto por solicitud */}
-          {/*
+          {/* Mobile Menu Button */}
           <button
             className="md:hidden text-primary ml-8"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
-          */}
         </div>
 
-        {/* Mobile Menu oculto por solicitud */}
-        {/*
+        {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden border-t border-border bg-card/95 backdrop-blur-md">
             <div className="px-4 py-6 space-y-4">
@@ -80,10 +77,10 @@ const Header = () => {
                 <span className="flex-1 text-left">WISHLIST NOW</span>
                 <img src={steamIcon} alt="Steam" className="w-6 h-6 ml-4" />
               </Button>
+              
             </div>
           </div>
         )}
-        */}
       </div>
     </header>
   );
