@@ -31,28 +31,30 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-0 max-w-6xl mx-auto">
+      <div className="relative z-10 text-center px-0 max-w-6xl mx-auto animate-fade-in">
         {/* Main Title */}
         <img src={principalIcon} alt="Main Title" className="mx-auto max-w-full h-auto mb-0 mt-0 animate-fade-in" />
 
         {/* Subtitle */}
-        <blockquote className="italic text-xl md:text-2xl text-white mt-0 mb-2 animate-fade-in">
+        <blockquote className="italic text-xl md:text-2xl text-white mt-0 mb-2 animate-fade-up" style={{ fontFamily: 'OCR A, monospace' }}>
           “one country, three flags”
         </blockquote>
-        <p className="text-xl md:text-2xl text-white mt-0 mb-0 animate-fade-in">
+        <p className="text-xl md:text-2xl text-white mt-0 mb-0 animate-fade-up" style={{ fontFamily: 'OCR A, monospace' }}>
           4v4 Competitive 3rd-Person Shooter
         </p>
 
         {/* Action Buttons */}
         <div className="flex flex-col space-y-2 mt-0 buttonsSection">
-          <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/10 rounded-none px-4 py-3 transition-colors duration-200 flex items-center justify-between w-56 mx-auto">
+          <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/10 rounded-none px-4 py-3 transition-colors duration-200 flex items-center justify-between w-56 mx-auto btn-animate-scale">
             <span className="flex-1 text-left">JOIN OUR DISCORD</span>
             <img src={discordIcon} alt="Discord" className="w-6 h-6 ml-4" />
           </Button>
-          <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/10 rounded-none px-4 py-3 transition-colors duration-200 flex items-center justify-between w-56 mx-auto">
+          {/*
+          <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/10 rounded-none px-4 py-3 transition-colors duration-200 flex items-center justify-between w-56 mx-auto btn-animate-scale">
             <span className="flex-1 text-left">WISHLIST NOW</span>
             <img src={steamIcon} alt="Steam" className="w-6 h-6 ml-4" />
           </Button>
+          */}
         </div>
       </div>
     </section>
