@@ -24,45 +24,43 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-transparent shadow-none">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-2 sm:px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <img src={mainIcon} alt="Albatross Interactive Logo" className="h-14 w-auto object-contain" />
+            <img src={mainIcon} alt="Albatross Interactive Logo" className="h-10 sm:h-14 w-auto object-contain" />
           </div>
-
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
-            <div className="flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-4 sm:space-x-6">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               {/* Social Icons */}
-              <a href="https://www.tiktok.com/@unitedstate_game" className="flex items-center space-x-1 social-icon" target="_blank" rel="noopener noreferrer">
-                <img src={tiktokIcon} alt="TikTok" className="w-8 h-8 object-contain" />
+              <a href="https://www.tiktok.com/@unitedstate_game" className="flex items-center social-icon" target="_blank" rel="noopener noreferrer">
+                <img src={tiktokIcon} alt="TikTok" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
               </a>
-              <a href="https://www.instagram.com/unitedstategame/" className="flex items-center space-x-1 social-icon" target="_blank" rel="noopener noreferrer">
-                <img src={instagramIcon} alt="Instagram" className="w-8 h-8 object-contain" />
+              <a href="https://www.instagram.com/unitedstategame/" className="flex items-center social-icon" target="_blank" rel="noopener noreferrer">
+                <img src={instagramIcon} alt="Instagram" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
               </a>
-              <a href="https://x.com/UnitedStateGame" className="flex items-center space-x-1 social-icon" target="_blank" rel="noopener noreferrer">
-                <img src={xIcon} alt="X" className="w-8 h-8 object-contain" />
+              <a href="https://x.com/UnitedStateGame" className="flex items-center social-icon" target="_blank" rel="noopener noreferrer">
+                <img src={xIcon} alt="X" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
               </a>
-              <a href="https://www.youtube.com/@UnitedStateGame" className="flex items-center space-x-1 social-icon" target="_blank" rel="noopener noreferrer">
-                <img src={youtubeIcon} alt="YouTube" className="w-8 h-8 object-contain" />
+              <a href="https://www.youtube.com/@UnitedStateGame" className="flex items-center social-icon" target="_blank" rel="noopener noreferrer">
+                <img src={youtubeIcon} alt="YouTube" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
               </a>
-              <a href="https://discord.com/invite/k3KyYGtvD8" className="flex items-center space-x-1 social-icon" target="_blank" rel="noopener noreferrer">
-                <img src={discordIcon} alt="Discord" className="w-8 h-8 object-contain" />
+              <a href="https://discord.com/invite/k3KyYGtvD8" className="flex items-center social-icon" target="_blank" rel="noopener noreferrer">
+                <img src={discordIcon} alt="Discord" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
               </a>
             </div>
-
-            
-          
           </div>
 
           {/* Mobile Menu Button */}
+          {/*
           <button
             className="md:hidden text-primary ml-8"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
+          */}
         </div>
 
         {/* Mobile Menu */}
