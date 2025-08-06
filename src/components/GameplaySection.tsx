@@ -1,25 +1,53 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import mainBg2 from '@/assets/02b5992d-b5fa-4f13-b030-1facdfe4ca33-1.jpg';
 import map from '@/assets/MAP_JPG-e17429419701611-1-scaled.webp';
 
 const GameplaySection = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [showMagnifier, setShowMagnifier] = useState(false);
+  const wrapperRef = useRef(null);
   const imgRef = useRef(null);
+  const rafRef = useRef(null);
+
+  const [showMagnifier, setShowMagnifier] = useState(false);
+  const [displayPos, setDisplayPos] = useState({ x: 0, y: 0 }); // pos en el wrapper (px) para top/left
+  const [imgPos, setImgPos] = useState({ x: 0, y: 0 }); // pos relativa a la imagen (px) para background
 
   const magnifierSize = 220;
   const zoom = 3;
 
-  // Detecta si es móvil
-  const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
+  const isMobile =
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
 
   const handleMouseMove = (e) => {
     if (isMobile) return;
-    const { top, left } = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - left;
-    const y = e.clientY - top;
-    setPosition({ x, y });
+    // cancel previous rAF
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+
+    rafRef.current = requestAnimationFrame(() => {
+      if (!imgRef.current || !wrapperRef.current) return;
+
+      const imgRect = imgRef.current.getBoundingClientRect();
+      const wrapperRect = wrapperRef.current.getBoundingClientRect();
+
+      // coordenadas relativas a la imagen (útiles para calcular background-position)
+      const imgX = e.clientX - imgRect.left;
+      const imgY = e.clientY - imgRect.top;
+
+      // coordenadas para posicionar la lupa dentro del wrapper (top/left)
+      // esto permite que el overlay se coloque exactamente donde está el cursor visible
+      const displayX = e.clientX - wrapperRect.left;
+      const displayY = e.clientY - wrapperRect.top;
+
+      setImgPos({ x: imgX, y: imgY });
+      setDisplayPos({ x: displayX, y: displayY });
+    });
   };
+
+  // limpiar RAF al desmontar
+  React.useEffect(() => {
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   return (
     <section
@@ -37,6 +65,7 @@ const GameplaySection = () => {
       }}
     >
       <div
+        ref={wrapperRef}
         className="relative flex items-center justify-center"
         style={{
           width: '100%',
@@ -58,27 +87,32 @@ const GameplaySection = () => {
             maxHeight: '900px',
             objectFit: 'cover',
             display: 'block',
-            cursor: isMobile ? 'pointer' : 'default', // Siempre muestra el cursor en desktop
+            cursor: isMobile ? 'pointer' : 'none', // ocultar cursor para que la lupa sea el cursor
           }}
         />
 
-        {/* Lupa solo en desktop */}
-        {!isMobile && showMagnifier && (
+        {!isMobile && showMagnifier && imgRef.current && (
           <div
+            aria-hidden
             style={{
               position: 'absolute',
-              top: `${position.y - magnifierSize / 2}px`,
-              left: `${position.x - magnifierSize / 2}px`,
+              // colocamos la lupa en el wrapper usando displayPos (mismas coordenadas de referencia)
+              top: `${displayPos.y}px`,
+              left: `${displayPos.x}px`,
               width: `${magnifierSize}px`,
               height: `${magnifierSize}px`,
               borderRadius: '50%',
               border: '2px solid white',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+              transform: 'translate(-50%, -50%)', // centra exactamente la lupa en el punto del cursor
+              pointerEvents: 'none',
+              zIndex: 50,
               backgroundImage: `url(${map})`,
               backgroundRepeat: 'no-repeat',
-              backgroundSize: `${imgRef.current?.width * zoom}px ${imgRef.current?.height * zoom}px`,
-              backgroundPosition: `-${position.x * zoom - magnifierSize / 2}px -${position.y * zoom - magnifierSize / 2}px`,
-              pointerEvents: 'none',
-              zIndex: 10,
+              // backgroundSize: dimensiones mostradas * zoom
+              backgroundSize: `${imgRef.current.getBoundingClientRect().width * zoom}px ${imgRef.current.getBoundingClientRect().height * zoom}px`,
+              // backgroundPosition: colocar el punto imgPos.x,imgPos.y en el centro de la lupa
+              backgroundPosition: `${-(imgPos.x * zoom - magnifierSize / 2)}px ${-(imgPos.y * zoom - magnifierSize / 2)}px`,
             }}
           />
         )}
