@@ -194,7 +194,7 @@
   }
   .btn-animate-scale:hover {
     transform: scale(1.045);
-    box-shadow: 0 4px 24px 0 hsl(var(--gaming-primary)/0.18);
+    box-shadow: 0 4px 24px 0 hsl(0 0% 100% / 0.35); /* Cambia el brillo a blanco */
   }
 }
 
@@ -205,4 +205,9 @@
 .btn1 {
   background-color: #ea0303;
   
+}
+
+.buttonNs {
+
+  height: 42px;
 }

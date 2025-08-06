@@ -5,12 +5,17 @@ import map from '@/assets/MAP_JPG-e17429419701611-1-scaled.webp';
 const GameplaySection = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [showMagnifier, setShowMagnifier] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const imgRef = useRef(null);
 
-  const magnifierSize = 200;
-  const zoom = 2;
+  const magnifierSize = 220;
+  const zoom = 3;
+
+  // Detecta si es móvil
+  const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
 
   const handleMouseMove = (e) => {
+    if (isMobile) return;
     const { top, left } = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - left;
     const y = e.clientY - top;
@@ -26,7 +31,7 @@ const GameplaySection = () => {
         height: '100vh',
         backgroundImage: `url(${mainBg2})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center -160px', // Subimos el fondo
+        backgroundPosition: 'center -160px',
         backgroundRepeat: 'no-repeat',
         position: 'relative',
         overflow: 'hidden',
@@ -44,18 +49,10 @@ const GameplaySection = () => {
           src={map}
           alt="Mapa"
           ref={imgRef}
-          onMouseEnter={() => setShowMagnifier(true)}
-          onMouseLeave={() => setShowMagnifier(false)}
+          onMouseEnter={() => !isMobile && setShowMagnifier(true)}
+          onMouseLeave={() => !isMobile && setShowMagnifier(false)}
           onMouseMove={handleMouseMove}
-          onTouchStart={() => setShowMagnifier(true)}
-          onTouchEnd={() => setShowMagnifier(false)}
-          onTouchMove={(e) => {
-            const touch = e.touches[0];
-            const { top, left } = imgRef.current.getBoundingClientRect();
-            const x = touch.clientX - left;
-            const y = touch.clientY - top;
-            setPosition({ x, y });
-          }}
+          onClick={() => isMobile && setShowModal(true)}
           style={{
             width: '100%',
             height: 'auto',
@@ -63,15 +60,24 @@ const GameplaySection = () => {
             maxHeight: '900px',
             objectFit: 'cover',
             display: 'block',
+            cursor: isMobile ? 'pointer' : 'default', // Siempre muestra el cursor en desktop
           }}
         />
 
-        {showMagnifier && (
+        {/* Modal para móviles */}
+        {isMobile && showModal && (
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50" onClick={() => setShowModal(false)}>
+            <img src={map} alt="Mapa grande" className="max-w-full max-h-full rounded shadow-lg" />
+          </div>
+        )}
+
+        {/* Lupa solo en desktop */}
+        {!isMobile && showMagnifier && (
           <div
             style={{
               position: 'absolute',
-              top: `${position.y - magnifierSize / 3}px`,
-              left: `${position.x - magnifierSize / 3}px`,
+              top: `${position.y - magnifierSize / 2}px`,
+              left: `${position.x - magnifierSize / 2}px`,
               width: `${magnifierSize}px`,
               height: `${magnifierSize}px`,
               borderRadius: '50%',
@@ -79,9 +85,7 @@ const GameplaySection = () => {
               backgroundImage: `url(${map})`,
               backgroundRepeat: 'no-repeat',
               backgroundSize: `${imgRef.current?.width * zoom}px ${imgRef.current?.height * zoom}px`,
-              backgroundPosition: `-${position.x * zoom - magnifierSize / 2}px -${
-                position.y * zoom - magnifierSize / 2
-              }px`,
+              backgroundPosition: `-${position.x * zoom - magnifierSize / 2}px -${position.y * zoom - magnifierSize / 2}px`,
               pointerEvents: 'none',
               zIndex: 10,
             }}

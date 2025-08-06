@@ -64,7 +64,13 @@ const NewsletterSection = () => {
         {/* Contact */}
         <div className="mb-6 sm:mb-10">
           <h3 className="text-lg sm:text-2xl font-bold mb-2">CONTACT US</h3>
-          <div className="text-base sm:text-lg break-all">contact@unitedstategame.com</div>
+          <a
+            href="mailto:contact@unitedstategame.com"
+            className="text-base sm:text-lg break-all no-underline hover:text-gray-200 transition-colors duration-200"
+            style={{ textDecoration: 'none' }}
+          >
+            contact@unitedstategame.com
+          </a>
         </div>
         {/* Newsletter */}
         <div className="mb-6 sm:mb-8 w-full max-w-xs sm:max-w-md">
@@ -73,14 +79,14 @@ const NewsletterSection = () => {
             <input
               type="email"
               placeholder="Enter your email address"
-              className="px-3 py-2 rounded-l bg-black/40 text-white border border-white/20 w-full min-w-[180px] sm:min-w-[300px]"
+              className="px-3 py-2 rounded-l bg-black/40 text-white border border-white/20 w-full min-w-[180px] sm:min-w-[300px] focus:outline-none focus:ring-0"
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
             />
             <button
               type="submit"
-              className="h-10 sm:h-12 bg-gray-300 text-black rounded-r font-bold text-base sm:text-lg border border-white/20 w-full sm:w-32 sm:-ml-1 mt-2 sm:mt-0"
+              className="buttonNs  bg-gray-300 text-black rounded-r font-bold text-base sm:text-lg border border-white/20 w-full sm:w-32 sm:-ml-1 mt-2 sm:mt-0"
               disabled={isSubscribed}
             >
               {isSubscribed ? 'SUBSCRIBED' : 'SIGN UP'}
