@@ -5,7 +5,6 @@ import map from '@/assets/MAP_JPG-e17429419701611-1-scaled.webp';
 const GameplaySection = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [showMagnifier, setShowMagnifier] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const imgRef = useRef(null);
 
   const magnifierSize = 220;
@@ -52,7 +51,6 @@ const GameplaySection = () => {
           onMouseEnter={() => !isMobile && setShowMagnifier(true)}
           onMouseLeave={() => !isMobile && setShowMagnifier(false)}
           onMouseMove={handleMouseMove}
-          onClick={() => isMobile && setShowModal(true)}
           style={{
             width: '100%',
             height: 'auto',
@@ -63,13 +61,6 @@ const GameplaySection = () => {
             cursor: isMobile ? 'pointer' : 'default', // Siempre muestra el cursor en desktop
           }}
         />
-
-        {/* Modal para móviles */}
-        {isMobile && showModal && (
-          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50" onClick={() => setShowModal(false)}>
-            <img src={map} alt="Mapa grande" className="max-w-full max-h-full rounded shadow-lg" />
-          </div>
-        )}
 
         {/* Lupa solo en desktop */}
         {!isMobile && showMagnifier && (
