@@ -28,7 +28,9 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <img src={mainIcon} alt="Albatross Interactive Logo" className="h-10 sm:h-14 w-auto object-contain" />
+            <a href="https://albatrossinteractive.com" target="_blank" rel="noopener noreferrer">
+              <img src={mainIcon} alt="Albatross Interactive Logo" className="h-10 sm:h-14 w-auto object-contain" />
+            </a>
           </div>
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4 sm:space-x-6">
