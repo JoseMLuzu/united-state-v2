@@ -10,6 +10,7 @@ const GameplaySection = () => {
   const [showMagnifier, setShowMagnifier] = useState(false);
   const [displayPos, setDisplayPos] = useState({ x: 0, y: 0 }); // pos en el wrapper (px) para top/left
   const [imgPos, setImgPos] = useState({ x: 0, y: 0 }); // pos relativa a la imagen (px) para background
+  const [showModal, setShowModal] = useState(false);
 
   const magnifierSize = 220;
   const zoom = 3;
@@ -81,9 +82,7 @@ const GameplaySection = () => {
           onMouseLeave={() => !isMobile && setShowMagnifier(false)}
           onMouseMove={handleMouseMove}
           onClick={() => {
-            if (isMobile) {
-              window.open('/mapa-grande', '_self');
-            }
+            if (isMobile) setShowModal(true);
           }}
           style={{
             width: '100%',
@@ -92,9 +91,28 @@ const GameplaySection = () => {
             maxHeight: '900px',
             objectFit: 'cover',
             display: 'block',
-            cursor: isMobile ? 'pointer' : 'none', // ocultar cursor para que la lupa sea el cursor
+            cursor: isMobile ? 'pointer' : 'none',
           }}
         />
+
+        {/* Modal para móviles */}
+        {isMobile && showModal && (
+          <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50" onClick={() => setShowModal(false)}>
+            <img
+              src={map}
+              alt="Mapa grande"
+              className="max-w-full max-h-full rounded-lg shadow-2xl"
+              style={{ width: '95vw', height: 'auto', maxHeight: '90vh' }}
+            />
+            <button
+              className="absolute top-4 right-4 text-white text-3xl font-bold bg-black/60 rounded-full px-3 py-1"
+              onClick={e => { e.stopPropagation(); setShowModal(false); }}
+              aria-label="Cerrar"
+            >
+              ×
+            </button>
+          </div>
+        )}
 
         {!isMobile && showMagnifier && imgRef.current && (
           <div
