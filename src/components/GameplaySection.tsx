@@ -97,7 +97,25 @@ const GameplaySection = () => {
 
         {/* Modal para móviles */}
         {isMobile && showModal && (
-          <div className="fixed inset-0 bg-black/95 flex items-center justify-center z-50 p-0" onClick={() => setShowModal(false)}>
+          <div
+            className="fixed left-0 top-0 w-screen h-screen bg-black/95 flex items-center justify-center z-50 p-0"
+            style={{
+              position: 'fixed',
+              left: 0,
+              top: 0,
+              width: '100vw',
+              height: '100vh',
+              zIndex: 9999,
+              background: 'rgba(0,0,0,0.95)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 0,
+              // Asegura que el modal siga el scroll actual
+              // y no salte al top de la página
+            }}
+            onClick={() => setShowModal(false)}
+          >
             <img
               src={map}
               alt="Mapa grande"
