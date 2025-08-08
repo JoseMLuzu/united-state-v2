@@ -80,6 +80,11 @@ const GameplaySection = () => {
           onMouseEnter={() => !isMobile && setShowMagnifier(true)}
           onMouseLeave={() => !isMobile && setShowMagnifier(false)}
           onMouseMove={handleMouseMove}
+          onClick={() => {
+            if (isMobile) {
+              window.open('/mapa-grande', '_self');
+            }
+          }}
           style={{
             width: '100%',
             height: 'auto',
