@@ -97,15 +97,25 @@ const GameplaySection = () => {
 
         {/* Modal para móviles */}
         {isMobile && showModal && (
-          <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50" onClick={() => setShowModal(false)}>
+          <div className="fixed inset-0 bg-black/95 flex items-center justify-center z-50 p-0" onClick={() => setShowModal(false)}>
             <img
               src={map}
               alt="Mapa grande"
-              className="max-w-full max-h-full rounded-lg shadow-2xl"
-              style={{ width: '95vw', height: 'auto', maxHeight: '90vh' }}
+              className="rounded-lg shadow-2xl"
+              style={{
+                width: '100vw',
+                height: '100vh',
+                objectFit: 'contain',
+                maxWidth: '100vw',
+                maxHeight: '100vh',
+                margin: 0,
+                padding: 0,
+                display: 'block',
+                background: 'black',
+              }}
             />
             <button
-              className="absolute top-4 right-4 text-white text-3xl font-bold bg-black/60 rounded-full px-3 py-1"
+              className="absolute top-3 right-3 text-white text-3xl font-bold bg-black/60 rounded-full px-3 py-1"
               onClick={e => { e.stopPropagation(); setShowModal(false); }}
               aria-label="Cerrar"
             >
