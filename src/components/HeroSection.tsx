@@ -2,6 +2,10 @@ import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
 import heroBg from '@/assets/Faded_Image.jpg';
 import principalIcon from '@/assets/main-title-transparent-V3-no-gradient-for-dark-background2-e1742786470534.png';
+import tiktokIcon from '@/assets/icons8-tiktok-50.png';
+import instagramIcon from '@/assets/instagram-white-icon1.png';
+import xIcon from '@/assets/X.png';
+import youtubeIcon from '@/assets/youtube.png';
 import discordIcon from '@/assets/discord.png'; //
 import steamIcon from '@/assets/steam1.png'; // Assuming you have a Steam icon
 
@@ -32,7 +36,28 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center px-0 max-w-6xl mx-auto animate-fade-in">
-        {/* Main Title */}
+        {/* Mobile Social Icons (centered above main icon, only on mobile) */}
+        <div className="flex md:hidden w-full justify-center mt-4 mb-2">
+          <div className="flex items-center space-x-4">
+            <a href="https://www.tiktok.com/@unitedstate_game" className="flex items-center social-icon" target="_blank" rel="noopener noreferrer">
+              <img src={tiktokIcon} alt="TikTok" className="w-7 h-7 object-contain" />
+            </a>
+            <a href="https://www.instagram.com/unitedstategame/" className="flex items-center social-icon" target="_blank" rel="noopener noreferrer">
+              <img src={instagramIcon} alt="Instagram" className="w-7 h-7 object-contain" />
+            </a>
+            <a href="https://x.com/UnitedStateGame" className="flex items-center social-icon" target="_blank" rel="noopener noreferrer">
+              <img src={xIcon} alt="X" className="w-7 h-7 object-contain" />
+            </a>
+            <a href="https://www.youtube.com/@UnitedStateGame" className="flex items-center social-icon" target="_blank" rel="noopener noreferrer">
+              <img src={youtubeIcon} alt="YouTube" className="w-7 h-7 object-contain" />
+            </a>
+            <a href="https://discord.com/invite/k3KyYGtvD8" className="flex items-center social-icon" target="_blank" rel="noopener noreferrer">
+              <img src={discordIcon} alt="Discord" className="w-7 h-7 object-contain" />
+            </a>
+          </div>
+        </div>
+
+        {/* Main Title Icon */}
         <img src={principalIcon} alt="Main Title" className="mx-auto max-w-full h-auto mb-0 mt-0 animate-fade-in" />
 
         {/* Subtitle */}
@@ -48,7 +73,7 @@ const HeroSection = () => {
           <a href="https://discord.com/invite/k3KyYGtvD8" target="_blank" rel="noopener noreferrer">
             <Button className="bg-white/10 hover:bg-white/30 backdrop-blur-md text-white border border-white/10 rounded-none px-4 py-3 transition-colors duration-200 flex items-center justify-between w-56 mx-auto btn-animate-scale focus:ring-2 focus:ring-white/60" >
               <span className="flex-1 text-left">JOIN OUR DISCORD</span>
-              <img src={discordIcon} alt="Discord" className="w-6 h-6 ml-4" />
+              <img src={discordIcon} alt="Discord" className="w-5 h-5 md:w-6 md:h-6 ml-3 md:ml-4" />
             </Button>
           </a>
           {/*
