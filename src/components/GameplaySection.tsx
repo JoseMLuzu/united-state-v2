@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import mainBg2 from '@/assets/02b5992d-b5fa-4f13-b030-1facdfe4ca33-1.jpg';
 import map from '@/assets/MAP_JPG-e17429419701611-1-scaled.webp';
 
@@ -8,9 +9,9 @@ const GameplaySection = () => {
   const rafRef = useRef(null);
 
   const [showMagnifier, setShowMagnifier] = useState(false);
-  const [displayPos, setDisplayPos] = useState({ x: 0, y: 0 }); // pos en el wrapper (px) para top/left
-  const [imgPos, setImgPos] = useState({ x: 0, y: 0 }); // pos relativa a la imagen (px) para background
-  const [showModal, setShowModal] = useState(false);
+  const [displayPos, setDisplayPos] = useState({ x: 0, y: 0 });
+  const [imgPos, setImgPos] = useState({ x: 0, y: 0 });
+  const [showMapPopup, setShowMapPopup] = useState(false);
 
   const magnifierSize = 220;
   const zoom = 3;
@@ -20,7 +21,6 @@ const GameplaySection = () => {
 
   const handleMouseMove = (e) => {
     if (isMobile) return;
-    // cancel previous rAF
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
 
     rafRef.current = requestAnimationFrame(() => {
@@ -29,12 +29,9 @@ const GameplaySection = () => {
       const imgRect = imgRef.current.getBoundingClientRect();
       const wrapperRect = wrapperRef.current.getBoundingClientRect();
 
-      // coordenadas relativas a la imagen (útiles para calcular background-position)
       const imgX = e.clientX - imgRect.left;
       const imgY = e.clientY - imgRect.top;
 
-      // coordenadas para posicionar la lupa dentro del wrapper (top/left)
-      // esto permite que el overlay se coloque exactamente donde está el cursor visible
       const displayX = e.clientX - wrapperRect.left;
       const displayY = e.clientY - wrapperRect.top;
 
@@ -43,132 +40,119 @@ const GameplaySection = () => {
     });
   };
 
-  // limpiar RAF al desmontar
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
-  return (
-    <section
-      id="gameplay-section"
-      className="fade-bg flex items-center justify-center px-4"
+  // Bloqueo de scroll
+  useEffect(() => {
+    if (isMobile && showMapPopup) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobile, showMapPopup]);
+
+  const popup = (
+    <div
       style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
         width: '100vw',
         height: '100vh',
-        backgroundImage: `url(${mainBg2})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center -160px',
-        backgroundRepeat: 'no-repeat',
-        position: 'relative',
-        overflow: 'hidden',
+        background: 'rgba(0,0,0,0.95)',
+        zIndex: 99999,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
       }}
     >
-      <div
-        ref={wrapperRef}
-        className="relative flex items-center justify-center"
+      <button
+        onClick={() => setShowMapPopup(false)}
         style={{
-          width: '100%',
-          height: '100%',
-          position: 'relative',
+          position: 'absolute',
+          top: 24,
+          right: 24,
+          background: 'rgba(0,0,0,0.7)',
+          color: 'white',
+          border: 'none',
+          borderRadius: '50%',
+          width: 40,
+          height: 40,
+          fontSize: 28,
+          zIndex: 100000,
+          cursor: 'pointer',
         }}
       >
-        <img
-          src={map}
-          alt="Mapa"
-          ref={imgRef}
-          onMouseEnter={() => !isMobile && setShowMagnifier(true)}
-          onMouseLeave={() => !isMobile && setShowMagnifier(false)}
-          onMouseMove={handleMouseMove}
-          onClick={() => {
-            if (isMobile) setShowModal(true);
-          }}
-          style={{
-            width: '100%',
-            height: 'auto',
-            maxWidth: '1200px',
-            maxHeight: '900px',
-            objectFit: 'cover',
-            display: 'block',
-            cursor: isMobile ? 'pointer' : 'none',
-          }}
-        />
+        ×
+      </button>
+      <img
+        src={map}
+        alt="Mapa grande"
+        style={{
+          width: '100%',
+          height: 'auto',
+          maxHeight: '90vh',
+          objectFit: 'contain',
+          borderRadius: 8,
+          boxShadow: '0 4px 32px rgba(0,0,0,0.7)',
+        }}
+      />
+    </div>
+  );
 
-        {/* Modal para móviles */}
-        {isMobile && showModal && (
-          <div
-            className="fixed left-0 top-0 w-screen h-screen bg-black/95 flex items-center justify-center z-50 p-0"
+  return (
+    <>
+      <section
+        id="gameplay-section"
+        className="fade-bg flex items-center justify-center px-4"
+        style={{
+          width: '100vw',
+          height: '100vh',
+          backgroundImage: `url(${mainBg2})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center -160px',
+          backgroundRepeat: 'no-repeat',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          ref={wrapperRef}
+          className="relative flex items-center justify-center"
+          style={{ width: '100%', height: '100%' }}
+        >
+          <img
+            src={map}
+            alt="Mapa"
+            ref={imgRef}
+            onMouseEnter={() => !isMobile && setShowMagnifier(true)}
+            onMouseLeave={() => !isMobile && setShowMagnifier(false)}
+            onMouseMove={handleMouseMove}
+            onClick={() => isMobile && setShowMapPopup(true)}
             style={{
-              position: 'fixed',
-              left: 0,
-              top: 0,
-              width: '100vw',
-              height: '100vh',
-              zIndex: 9999,
-              background: 'rgba(0,0,0,0.95)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 0,
-              // Asegura que el modal siga el scroll actual
-              // y no salte al top de la página
-            }}
-            onClick={() => setShowModal(false)}
-          >
-            <img
-              src={map}
-              alt="Mapa grande"
-              className="rounded-lg shadow-2xl"
-              style={{
-                width: '100vw',
-                height: '100vh',
-                objectFit: 'contain',
-                maxWidth: '100vw',
-                maxHeight: '100vh',
-                margin: 0,
-                padding: 0,
-                display: 'block',
-                background: 'black',
-              }}
-            />
-            <button
-              className="absolute top-3 right-3 text-white text-3xl font-bold bg-black/60 rounded-full px-3 py-1"
-              onClick={e => { e.stopPropagation(); setShowModal(false); }}
-              aria-label="Cerrar"
-            >
-              ×
-            </button>
-          </div>
-        )}
-
-        {!isMobile && showMagnifier && imgRef.current && (
-          <div
-            aria-hidden
-            style={{
-              position: 'absolute',
-              // colocamos la lupa en el wrapper usando displayPos (mismas coordenadas de referencia)
-              top: `${displayPos.y}px`,
-              left: `${displayPos.x}px`,
-              width: `${magnifierSize}px`,
-              height: `${magnifierSize}px`,
-              borderRadius: '50%',
-              border: '2px solid white',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
-              transform: 'translate(-50%, -50%)', // centra exactamente la lupa en el punto del cursor
-              pointerEvents: 'none',
-              zIndex: 50,
-              backgroundImage: `url(${map})`,
-              backgroundRepeat: 'no-repeat',
-              // backgroundSize: dimensiones mostradas * zoom
-              backgroundSize: `${imgRef.current.getBoundingClientRect().width * zoom}px ${imgRef.current.getBoundingClientRect().height * zoom}px`,
-              // backgroundPosition: colocar el punto imgPos.x,imgPos.y en el centro de la lupa
-              backgroundPosition: `${-(imgPos.x * zoom - magnifierSize / 2)}px ${-(imgPos.y * zoom - magnifierSize / 2)}px`,
+              width: '100%',
+              height: 'auto',
+              maxWidth: '1200px',
+              maxHeight: '900px',
+              objectFit: 'cover',
+              display: 'block',
+              cursor: isMobile ? 'pointer' : 'none',
             }}
           />
-        )}
-      </div>
-    </section>
+        </div>
+      </section>
+
+      {/* Renderizamos popup fuera del flujo usando portal */}
+      {isMobile && showMapPopup && ReactDOM.createPortal(popup, document.body)}
+    </>
   );
 };
 
